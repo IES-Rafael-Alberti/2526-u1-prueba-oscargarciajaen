@@ -56,7 +56,7 @@ def procesar_linea(linea: str) -> str:
     # --- Implementación del alumnado aquí ---
     raise NotImplementedError("Función aún no implementada por el alumnado.")
 
-
+# a main se llama de la siguiente forma  main(sys.argv)
 def main(argv: List[str]) -> None:
     if len(argv) < 2:
         print("Uso: python programa.py <ruta_entrada.txt>")
@@ -67,6 +67,3 @@ def main(argv: List[str]) -> None:
         resultado = procesar_linea(linea)   # <- llamada a la función de los alumnos
         print(resultado)                     # <- impresión del resultado
 
-
-if __name__ == "__main__":
-    main(sys.argv)
