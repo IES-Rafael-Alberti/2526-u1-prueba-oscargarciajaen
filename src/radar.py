@@ -17,6 +17,7 @@ def leer_casos(ruta_fichero: str) -> List[str]:
     Lee un fichero de texto con casos de prueba, devolviendo
     una lista de líneas (str) ya limpias, sin la línea de terminación "0 0 0".
     Ignora líneas en blanco y comentarios que empiecen por '#'.
+
     """
     ruta = Path(ruta_fichero)
     if not ruta.exists():
@@ -40,21 +41,56 @@ def procesar_linea(linea: str) -> str:
 
     Recibe:
         linea (str): cadena con tres enteros: distancia_m, vmax_kmh, tiempo_s,
-                     separados por espacios.
+         separados por espacios.
 
     Debe devolver uno de los textos EXACTOS:
+
         - "OK"
+
         - "MULTA"
+
         - "PUNTOS"
+
         - "ERROR"
 
     Recomendación:
+
     1) Parsear ints; si hay problema o valores inválidos -> "ERROR".
+
     2) Calcular la velocidad media y compararla con los umbrales.
+
     3) Devolver el texto pedido.
+
     """
-    # --- Implementación del alumnado aquí ---
-    raise NotImplementedError("Función aún no implementada por el alumnado.")
+  # --- Implementación del alumnado aquí ---
+
+    distancia_m, vmax_kmh, tiempo_s = linea.split()
+    distancia_m = int(distancia_m)
+    vmax_kmh = int(vmax_kmh)
+    tiempo_s = int(tiempo_s)
+
+    try:
+        if distancia_m <= 0 or vmax_kmh <= 0 or tiempo_s <= 0:
+            return("ERROR")
+        else:
+        
+            velocidad_media = (distancia_m/tiempo_s)*3.6
+
+            if velocidad_media <= vmax_kmh:
+                return("OK")
+            elif vmax_kmh < velocidad_media and velocidad_media < vmax_kmh*(1.20):
+                return("MULTA")
+            elif velocidad_media >= vmax_kmh*(1.20):
+                return("PUNTOS")
+            else:
+                return("ERROR")
+    
+    except ValueError:
+        return("ERROR")
+    
+    
+  #  raise NotImplementedError("Función aún no implementada por el alumnado.")
+
 
 # a main se llama de la siguiente forma  main(sys.argv)
 def main(argv: List[str]) -> None:
@@ -66,4 +102,3 @@ def main(argv: List[str]) -> None:
     for linea in leer_casos(ruta):
         resultado = procesar_linea(linea)   # <- llamada a la función de los alumnos
         print(resultado)                     # <- impresión del resultado
-
