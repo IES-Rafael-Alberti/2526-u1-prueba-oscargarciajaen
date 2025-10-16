@@ -1,8 +1,8 @@
-# test_radares.py
+# test_radar.py
 # -*- coding: utf-8 -*-
 
 import pytest
-from solucion import procesar_linea
+from radar import procesar_linea
 
 @pytest.mark.parametrize(
     "linea, esperado",
@@ -29,4 +29,4 @@ from solucion import procesar_linea
 
 # Debes darle contenido a la siguiente función
 def test_procesar_linea(linea, esperado):
-   
+    assert procesar_linea(linea) == esperado
